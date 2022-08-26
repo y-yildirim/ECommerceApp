@@ -9,8 +9,8 @@ namespace ECommerceApp.Persistence.Contexts
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; } = default!;
+        public DbSet<Order> Orders { get; set; } = default!;
+        public DbSet<Product> Products { get; set; } = default!;
     }
 }
