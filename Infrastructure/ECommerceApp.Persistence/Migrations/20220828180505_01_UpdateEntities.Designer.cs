@@ -3,6 +3,7 @@ using System;
 using ECommerceApp.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECommerceApp.Persistence.Migrations
 {
     [DbContext(typeof(ECommerceAppDbContext))]
-    partial class ECommerceAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220828180505_01_UpdateEntities")]
+    partial class _01_UpdateEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +58,10 @@ namespace ECommerceApp.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("CustomerId")
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("CustomerId1")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -68,7 +73,7 @@ namespace ECommerceApp.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
 
                     b.ToTable("Orders");
                 });
@@ -119,7 +124,7 @@ namespace ECommerceApp.Persistence.Migrations
                 {
                     b.HasOne("ECommerceApp.Domain.Entities.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("CustomerId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

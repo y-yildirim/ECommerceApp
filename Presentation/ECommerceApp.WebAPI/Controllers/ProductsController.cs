@@ -1,4 +1,7 @@
-﻿using ECommerceApp.Application.Repositories.ProductRepositories;
+﻿using ECommerceApp.Application.Repositories.CustomerRepositories;
+using ECommerceApp.Application.Repositories.OrderRepositories;
+using ECommerceApp.Application.Repositories.ProductRepositories;
+using ECommerceApp.Persistence.Repositories.OrderRepositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceApp.WebAPI.Controllers
@@ -9,11 +12,17 @@ namespace ECommerceApp.WebAPI.Controllers
     {
         readonly private IProductReadRepository _productReadRepository;
         readonly private IProductWriteRepository _productWriteRepository;
+        readonly private IOrderReadRepository _orderReadRepository;
+        readonly private IOrderWriteRepository _orderWriteRepository;
+        readonly private ICustomerWriteRepository _customerWriteRepository;
 
-        public ProductsController(IProductReadRepository productReadRepository, IProductWriteRepository productWriteRepository)
+        public ProductsController(IProductReadRepository productReadRepository, IProductWriteRepository productWriteRepository, IOrderReadRepository orderReadRepository, IOrderWriteRepository orderWriteRepository, ICustomerWriteRepository customerWriteRepository)
         {
             _productReadRepository = productReadRepository;
             _productWriteRepository = productWriteRepository;
+            _orderReadRepository = orderReadRepository;
+            _orderWriteRepository = orderWriteRepository;
+            _customerWriteRepository = customerWriteRepository;
         }
 
         [HttpGet]
@@ -28,11 +37,16 @@ namespace ECommerceApp.WebAPI.Controllers
             await _productWriteRepository.SaveAsync();
         }
 
+        // Test
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var product = await _productReadRepository.GetByIdAsync(id);
-            return Ok(product);
+            //await _customerWriteRepository.AddAsync(new() { Name = "fyVS" });
+            //await _customerWriteRepository.SaveAsync();
+            await _orderWriteRepository.AddAsync(new() { Adress = "Istanbul", Description = "asdfasdf", CustomerId = Guid.Parse("667ba257-d208-4c48-a11a-764edf4e5a50") });
+            await _orderWriteRepository.SaveAsync();
+
+            return Ok();
         }
     }
 }
