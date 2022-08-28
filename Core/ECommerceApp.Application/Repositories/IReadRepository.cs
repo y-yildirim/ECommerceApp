@@ -5,9 +5,9 @@ namespace ECommerceApp.Application.Repositories
 {
     public interface IReadRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
-        Task<List<TEntity>> GetAll();
-        Task<List<TEntity>> GetWhere(Expression<Func<TEntity, bool>> method);
-        Task<TEntity?> GetSingleAsync(Expression<Func<TEntity, bool>> method);
-        Task<TEntity?> GetByIdAsync(string id);
+        Task<List<TEntity>> GetAll(bool tracking);
+        Task<List<TEntity>> GetWhere(Expression<Func<TEntity, bool>> method, bool tracking);
+        Task<TEntity?> GetSingleAsync(Expression<Func<TEntity, bool>> method, bool tracking);
+        Task<TEntity?> GetByIdAsync(string id, bool tracking);
     }
 }
