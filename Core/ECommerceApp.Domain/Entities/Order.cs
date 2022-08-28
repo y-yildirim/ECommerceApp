@@ -4,7 +4,7 @@ namespace ECommerceApp.Domain.Entities
 {
     public class Order : BaseEntity
     {
-        public int CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
         public string Description { get; set; }
         public string Adress { get; set; } // kk value object is on the way
 
