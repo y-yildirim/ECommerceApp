@@ -23,6 +23,6 @@ namespace ECommerceApp.Persistence.Repositories
 
         public async Task<TEntity?> GetSingleAsync(Expression<Func<TEntity, bool>> method) => await Table.FirstOrDefaultAsync(method);
 
-        public async Task<TEntity?> GetByIdAsync(string id) => await Table.FindAsync(id);
+        public async Task<TEntity?> GetByIdAsync(string id) => await Table.FindAsync(Guid.Parse(id));
     }
 }
